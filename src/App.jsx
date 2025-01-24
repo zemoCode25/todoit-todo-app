@@ -1,5 +1,11 @@
+import { Header } from "./components/home/Header";
+
 function App() {
-  return <h1>HELLO HAHAHAHHA</h1>;
+  return (
+    <div className="font-inter">
+      <Header />
+    </div>
+  );
 }
 
 export default App;
