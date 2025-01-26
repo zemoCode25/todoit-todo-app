@@ -4,3 +4,10 @@
 @theme {
   --font-inter: "Inter", "sans";
 }
+
+@layer components {
+  .highlight-color ::selection {
+    background-color: #d1d5dc; /* Highlight color */
+    color: #000; /* Text color */
+  }
+}
