@@ -1,6 +1,7 @@
 import { Content } from "./hero_components/Content";
 import { Headline } from "./hero_components/Headline";
 import { Review } from "./hero_components/Review";
+import { Templates } from "./hero_components/Templates";
 
 export function Hero() {
   return (
@@ -8,6 +9,7 @@ export function Hero() {
       <Headline />
       <Review />
       <Content />
+      <Templates />
     </div>
   );
 }
