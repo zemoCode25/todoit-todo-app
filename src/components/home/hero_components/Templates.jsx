@@ -1,3 +1,5 @@
+import { TemplateContainer } from "./TemplateContainer";
+
 export function Templates() {
   return (
     <div className="my-36">
@@ -10,6 +12,7 @@ export function Templates() {
           templates made for you.
         </p>
       </div>
+      <TemplateContainer />
     </div>
   );
 }

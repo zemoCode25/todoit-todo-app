@@ -1,6 +1,6 @@
 export const contentTemplates = [
   {
-    templateGroupName: "work",
+    templateGroupName: "Work",
     templateGroup: [
       {
         templateName: "Accounting Tasks",
@@ -30,7 +30,7 @@ export const contentTemplates = [
     ],
   },
   {
-    templateGroupName: "personal",
+    templateGroupName: "Personal",
     templateGroup: [
       {
         templateName: "Goal Tracker",
@@ -60,7 +60,7 @@ export const contentTemplates = [
     ],
   },
   {
-    templateGroupName: "personal",
+    templateGroupName: "Education",
     templateGroup: [
       {
         templateName: "Class Planning",
