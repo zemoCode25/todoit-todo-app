@@ -10,7 +10,7 @@ export const contentTemplates = [
       {
         templateName: "Business Travel Packing",
         description:
-          "Boost your productivity by ensuring you're prepared for every business trip with this comprehensive packing checklist.",
+          "Boost your productivity by ensuring you're prepared for every business trip with comprehensive checklist.",
       },
       {
         templateName: "Client Management",
