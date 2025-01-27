@@ -1,4 +1,6 @@
-export function CTA() {
+import PropTypes from "prop-types";
+
+export function CTA({ directTodo }) {
   return (
     <section className="my-16">
       <div className="flex flex-col items-center">
@@ -9,10 +11,17 @@ export function CTA() {
         <p className="mb-5">
           374000+ ★★★★★ reviews on Google Play and App Store
         </p>
-        <button className="py-4 px-5 bg-black rounded-md text-white font-semibold hover:shadow-xl cursor-pointer">
+        <button
+          onClick={directTodo}
+          className="py-4 px-5 bg-black rounded-md text-white font-semibold hover:shadow-xl cursor-pointer"
+        >
           Start for Free
         </button>
       </div>
     </section>
   );
 }
+
+CTA.propTypes = {
+  directTodo: PropTypes.func.isRequired,
+};

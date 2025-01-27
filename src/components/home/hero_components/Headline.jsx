@@ -1,4 +1,6 @@
-export function Headline() {
+import PropTypes from "prop-types";
+
+export function Headline({ directTodo }) {
   return (
     <div className="flex justify-between">
       <div className="w-[40%]">
@@ -9,7 +11,10 @@ export function Headline() {
           Simplify life for both you and your team with the world’s #1 task
           manager and to-do list app.
         </p>
-        <button className="text-lg py-3 px-4 bg-black text-white font-semibold rounded-lg hover:shadow-md cursor-pointer">
+        <button
+          onClick={directTodo}
+          className="text-lg py-3 px-4 bg-black text-white font-semibold rounded-lg hover:shadow-md cursor-pointer"
+        >
           Start for free
         </button>
       </div>
@@ -22,3 +27,7 @@ export function Headline() {
     </div>
   );
 }
+
+Headline.propTypes = {
+  directTodo: PropTypes.func.isRequired,
+};

@@ -1,7 +1,13 @@
-export function Header() {
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
+export function Header({ directTodo }) {
   return (
     <header className="flex justify-between max-w-[1280px] mx-auto py-6">
-      <div className="flex items-center gap-2 cursor-pointer">
+      <div
+        onClick={directTodo}
+        className="flex items-center gap-2 cursor-pointer"
+      >
         <button className="h-fit p-1 bg-black rounded-md">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -17,13 +23,22 @@ export function Header() {
       </div>
       <nav>
         <ul className="flex justify-between align-middle items-center gap-5">
-          <li className="py-2 px-3 cursor-pointer rounded-md hover:bg-gray-200">
+          <Link
+            to={"/features"}
+            className="py-2 px-3 cursor-pointer rounded-md hover:bg-gray-200"
+          >
             Features
-          </li>
-          <li className="py-2 px-3 cursor-pointer rounded-md hover:bg-gray-200">
+          </Link>
+          <Link
+            to={"/blogs"}
+            className="py-2 px-3 cursor-pointer rounded-md hover:bg-gray-200"
+          >
             Blogs
-          </li>
-          <button className="py-2 px-3 bg-black rounded-md text-white font-semibold hover:shadow-md cursor-pointer">
+          </Link>
+          <button
+            onClick={directTodo}
+            className="py-2 px-3 bg-black rounded-md text-white font-semibold hover:shadow-md cursor-pointer"
+          >
             Start for Free
           </button>
         </ul>
@@ -31,3 +46,7 @@ export function Header() {
     </header>
   );
 }
+
+Header.propTypes = {
+  directTodo: PropTypes.func.isRequired,
+};
