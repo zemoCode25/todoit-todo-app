@@ -2,6 +2,7 @@ import { Content } from "./hero_components/Content";
 import { Headline } from "./hero_components/Headline";
 import { Review } from "./hero_components/Review";
 import { Templates } from "./hero_components/Templates";
+import { CTA } from "./hero_components/CTA";
 
 export function Hero() {
   return (
@@ -10,6 +11,7 @@ export function Hero() {
       <Review />
       <Content />
       <Templates />
+      <CTA />
     </div>
   );
 }
