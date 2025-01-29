@@ -1,3 +1,5 @@
 export function Todo() {
-  return <h1>Main App to boss</h1>;
+  return (
+    <main className="w-dvw h-dvh flex justify-between items-center"></main>
+  );
 }
