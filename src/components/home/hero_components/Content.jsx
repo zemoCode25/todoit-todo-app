@@ -37,7 +37,7 @@ export function Content() {
       </div>
       <div className="sticky top-40 pb-4 w-[55%] h-fit rounded-lg">
         <img
-          src="./public/assets/https___todoist.com_static_home-teams_intro_wide_headerui.en.avif"
+          src="./assets/https___todoist.com_static_home-teams_intro_wide_headerui.en.avif"
           alt="todoit headline image"
         />
       </div>

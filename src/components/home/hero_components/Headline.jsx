@@ -20,7 +20,7 @@ export function Headline({ directTodo }) {
       </div>
       <div className="pb-4 bg-black w-[55%] rounded-lg">
         <img
-          src="./public/assets/https___todoist.com_static_home-teams_intro_wide_headerui.en.avif"
+          src="./assets/https___todoist.com_static_home-teams_intro_wide_headerui.en.avif"
           alt="todoit headline image"
         />
       </div>
