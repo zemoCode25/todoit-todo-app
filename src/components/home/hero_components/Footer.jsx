@@ -1,10 +1,10 @@
 export function Footer() {
   return (
     <footer className="flex flex-col items-center py-5">
-      <div className="flex justify-between py-10 w-full">
+      <div className="flex w-full justify-between py-10">
         <div className="flex flex-col gap-5">
-          <div className="flex items-center gap-2 cursor-pointer">
-            <button className="h-fit p-1 bg-black rounded-md">
+          <div className="flex cursor-pointer items-center gap-2">
+            <button className="h-fit rounded-md bg-black p-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
@@ -17,7 +17,7 @@ export function Footer() {
             </button>
             <p className="text-2xl font-semibold">todoit</p>
           </div>
-          <p className="text-lg w-6/10">
+          <p className="w-6/10 text-lg">
             Join millions of people who organize work and life with Todoist.
           </p>
         </div>

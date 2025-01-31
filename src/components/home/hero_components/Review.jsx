@@ -1,6 +1,6 @@
 export function Review() {
   return (
-    <div className="flex justify-between items-center px-16 my-32">
+    <div className="my-32 flex items-center justify-between px-16">
       <div>
         <p className="w-2/3 text-center text-lg">
           <em>“Simple, straightforward, and super powerful”</em>

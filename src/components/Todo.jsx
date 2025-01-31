@@ -7,25 +7,25 @@ export function Todo() {
   const [isOpenModal, setOpenModal] = useState(false);
 
   return (
-    <main className="w-dvw h-dvh flex justify-center my-16">
-      <div className="relative flex flex-col w-2/3">
+    <main className="my-16 flex h-dvh w-dvw justify-center">
+      <div className="relative flex w-2/3 flex-col">
         <div>
           <h1 className="text-4xl font-semibold">todoit tasks!</h1>
           <p className="text-gray-600">
             Make sure to finish all your task today!
           </p>
         </div>
-        <div className="flex justify-between my-3">
+        <div className="my-3 flex justify-between">
           <input
-            className="py-1 px-2 text-sm outline outline-gray-300 rounded-md"
+            className="rounded-md px-2 py-1 text-sm outline outline-gray-300"
             placeholder="Filter task..."
             type="text"
           />
           <button
             onClick={() => setOpenModal(true)}
-            className="bg-black px-4 py-1.5 rounded-md text-white cursor-pointer hover:shadow-md"
+            className="cursor-pointer rounded-md bg-black px-4 py-1.5 text-white hover:shadow-md"
           >
-            <span className="px-1 text-white font-bold">+</span>Add task
+            <span className="px-1 font-bold text-white">+</span>Add task
           </button>
         </div>
         <TaskTable />

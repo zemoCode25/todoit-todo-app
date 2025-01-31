@@ -4,7 +4,7 @@ export function CTA({ directTodo }) {
   return (
     <section className="my-16">
       <div className="flex flex-col items-center">
-        <h4 className="text-5xl font-semibold text-center w-7/10 mb-8">
+        <h4 className="mb-8 w-7/10 text-center text-5xl font-semibold">
           Gain calmness and clarity with the world’s most beloved productivity
           app
         </h4>
@@ -13,7 +13,7 @@ export function CTA({ directTodo }) {
         </p>
         <button
           onClick={directTodo}
-          className="py-4 px-5 bg-black rounded-md text-white font-semibold hover:shadow-xl cursor-pointer"
+          className="cursor-pointer rounded-md bg-black px-5 py-4 font-semibold text-white hover:shadow-xl"
         >
           Start for Free
         </button>

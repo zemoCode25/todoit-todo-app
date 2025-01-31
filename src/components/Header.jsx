@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 export function Header({ directTodo }) {
   return (
-    <header className="flex justify-between max-w-[1280px] mx-auto py-6">
+    <header className="mx-auto flex max-w-[1280px] justify-between py-6">
       <div
         onClick={directTodo}
-        className="flex items-center gap-2 cursor-pointer"
+        className="flex cursor-pointer items-center gap-2"
       >
-        <button className="h-fit p-1 bg-black rounded-md">
+        <button className="h-fit rounded-md bg-black p-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
@@ -22,22 +22,22 @@ export function Header({ directTodo }) {
         <p className="text-2xl font-semibold">todoit</p>
       </div>
       <nav>
-        <ul className="flex justify-between align-middle items-center gap-5">
+        <ul className="flex items-center justify-between gap-5 align-middle">
           <Link
             to={"/features"}
-            className="py-2 px-3 cursor-pointer rounded-md hover:bg-gray-200"
+            className="cursor-pointer rounded-md px-3 py-2 hover:bg-gray-200"
           >
             Features
           </Link>
           <Link
             to={"/blogs"}
-            className="py-2 px-3 cursor-pointer rounded-md hover:bg-gray-200"
+            className="cursor-pointer rounded-md px-3 py-2 hover:bg-gray-200"
           >
             Blogs
           </Link>
           <button
             onClick={directTodo}
-            className="py-2 px-3 bg-black rounded-md text-white font-semibold hover:shadow-md cursor-pointer"
+            className="cursor-pointer rounded-md bg-black px-3 py-2 font-semibold text-white hover:shadow-md"
           >
             Start for Free
           </button>

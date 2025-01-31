@@ -9,7 +9,7 @@ export function TemplateContainer() {
   console.log(category);
 
   return (
-    <div className="flex flex-col items-center justify-center my-10">
+    <div className="my-10 flex flex-col items-center justify-center">
       <CategoryList updateCategory={setCategory} currentCategory={category} />
       <TemplateList category={category} />
     </div>
@@ -18,7 +18,7 @@ export function TemplateContainer() {
 
 function CategoryList({ updateCategory, currentCategory }) {
   const templateCategories = contentTemplates.map(
-    (contentTemplate) => contentTemplate.templateGroupName
+    (contentTemplate) => contentTemplate.templateGroupName,
   );
 
   console.log(templateCategories);
@@ -30,7 +30,7 @@ function CategoryList({ updateCategory, currentCategory }) {
           <li key={i}>
             <button
               onClick={() => updateCategory(category)}
-              className={`text-lg cursor-pointer font-semibold py-4 px-8 rounded-md ${
+              className={`cursor-pointer rounded-md px-8 py-4 text-lg font-semibold ${
                 currentCategory === category
                   ? "bg-black text-white"
                   : "bg-gray-100 text-black hover:bg-gray-200"
@@ -53,7 +53,7 @@ function TemplateList({ category }) {
   const templateGroup = template[0].templateGroup;
 
   return (
-    <ul className="flex gap-4 my-10">
+    <ul className="my-10 flex gap-4">
       {templateGroup.map((template, i) => (
         <li key={i}>
           <TemplateCard template={template} />

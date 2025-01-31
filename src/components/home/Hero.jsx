@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 export function Hero({ directTodo }) {
   return (
-    <div className="max-w-[1280px] mx-auto px-12 mt-24">
+    <div className="mx-auto mt-24 max-w-[1280px] px-12">
       <Headline directTodo={directTodo} />
       <Review />
       <Content />

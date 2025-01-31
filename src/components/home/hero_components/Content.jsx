@@ -1,7 +1,7 @@
 export function Content() {
   return (
-    <div className="relative flex justify-between my-10 h-full">
-      <div className="flex flex-col w-1/2 gap-72">
+    <div className="relative my-10 flex h-full justify-between">
+      <div className="flex w-1/2 flex-col gap-72">
         {
           // !Text Content Container
         }
@@ -35,7 +35,7 @@ export function Content() {
           </p>
         </div>
       </div>
-      <div className="sticky top-40 pb-4 w-[55%] h-fit rounded-lg">
+      <div className="sticky top-40 h-fit w-[55%] rounded-lg pb-4">
         <img
           src="./assets/https___todoist.com_static_home-teams_intro_wide_headerui.en.avif"
           alt="todoit headline image"

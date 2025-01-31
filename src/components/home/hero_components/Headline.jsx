@@ -7,18 +7,18 @@ export function Headline({ directTodo }) {
         <h1 className="text-[3.5rem] leading-none font-bold">
           Organize your work and life, finally.
         </h1>
-        <p className="text-lg w-11/12 my-4">
+        <p className="my-4 w-11/12 text-lg">
           Simplify life for both you and your team with the world’s #1 task
           manager and to-do list app.
         </p>
         <button
           onClick={directTodo}
-          className="text-lg py-3 px-4 bg-black text-white font-semibold rounded-lg hover:shadow-md cursor-pointer"
+          className="cursor-pointer rounded-lg bg-black px-4 py-3 text-lg font-semibold text-white hover:shadow-md"
         >
           Start for free
         </button>
       </div>
-      <div className="pb-4 bg-black w-[55%] rounded-lg">
+      <div className="w-[55%] rounded-lg bg-black pb-4">
         <img
           src="./assets/https___todoist.com_static_home-teams_intro_wide_headerui.en.avif"
           alt="todoit headline image"
