@@ -1,7 +1,11 @@
 import { TaskTable } from "./todo/TaskTable";
+import { TaskInputModal } from "./todo/TaskInputModal";
+import { useState } from "react";
 // import { Overlay } from "./utils/Overlay";
 
 export function Todo() {
+  const [isOpenModal, setOpenModal] = useState(false);
+
   return (
     <main className="w-dvw h-dvh flex justify-center my-16">
       <div className="flex flex-col w-2/3">
@@ -22,6 +26,10 @@ export function Todo() {
           </button>
         </div>
         <TaskTable />
+        <TaskInputModal
+          isOpen={isOpenModal}
+          onClose={() => setOpenModal(close)}
+        />
       </div>
     </main>
   );
