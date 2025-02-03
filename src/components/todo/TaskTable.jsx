@@ -16,7 +16,7 @@ export function TaskTable({ tasks }) {
             </th>
           </tr>
           {tasks.map((task, i) => (
-            <TableRow task={task} key={i} />
+            <tr key={i}>{<TableData task={task} />}</tr>
           ))}
         </tbody>
       </table>
@@ -24,14 +24,14 @@ export function TaskTable({ tasks }) {
   );
 }
 
-function TableRow({ task, key }) {
+function TableData({ task }) {
   return (
-    <tr key={key}>
+    <>
       <td>{task.taskName}</td>
       <td>{task.type}</td>
       <td>{task.taskStatus}</td>
       <td>{task.priority}</td>
-    </tr>
+    </>
   );
 }
 
@@ -39,8 +39,7 @@ TaskTable.propTypes = {
   tasks: PropTypes.array.isRequired,
 };
 
-TableRow.propTypes = {
-  key: PropTypes.number,
+TableData.propTypes = {
   task: PropTypes.shape({
     taskName: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
