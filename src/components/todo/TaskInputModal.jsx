@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useRef, useEffect, useState } from "react";
 
-export function TaskInputModal({ isOpen, onClose }) {
+export function TaskInputModal({ isOpen, onClose, onTaskSubmit }) {
   const modalRef = useRef(null);
   const [taskData, setTaskData] = useState({
     taskName: "",
@@ -16,6 +16,10 @@ export function TaskInputModal({ isOpen, onClose }) {
       ...taskData,
       [e.target.name]: e.target.value,
     });
+  }
+
+  function handleTaskSubmit() {
+    onTaskSubmit((prevTaskList) => [...prevTaskList, taskData]);
   }
 
   useEffect(() => {
@@ -100,7 +104,10 @@ export function TaskInputModal({ isOpen, onClose }) {
         >
           Cancel
         </button>
-        <button className="cursor-pointer rounded-md bg-black px-4 py-1 text-white">
+        <button
+          onClick={handleTaskSubmit}
+          className="cursor-pointer rounded-md bg-black px-4 py-1 text-white"
+        >
           Add Task
         </button>
       </div>
@@ -111,4 +118,5 @@ export function TaskInputModal({ isOpen, onClose }) {
 TaskInputModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onTaskSubmit: PropTypes.func.isRequired,
 };

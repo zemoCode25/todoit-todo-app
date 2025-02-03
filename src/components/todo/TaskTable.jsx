@@ -1,4 +1,6 @@
-export function TaskTable() {
+import PropTypes from "prop-types";
+
+export function TaskTable({ tasks }) {
   return (
     <div className="rounded-lg border border-gray-300">
       <table className="w-[100%] border-collapse">
@@ -13,27 +15,36 @@ export function TaskTable() {
               Priority
             </th>
           </tr>
-          <tr className="border-t-[1px] border-gray-300">
-            <td className="px-4 py-3 font-semibold">Alfreds Futterkiste</td>
-            <td className="px-4 py-3">Maria Anders</td>
-            <td className="px-4 py-3">Germany</td>
-          </tr>
-          <tr className="border-t-[1px] border-gray-300">
-            <td className="px-4 py-3 font-semibold">
-              Centro comercial Moctezuma
-            </td>
-            <td className="px-4 py-3">Francisco Chang</td>
-            <td className="px-4 py-3">Mexico</td>
-          </tr>
-          <tr className="border-t-[1px] border-gray-300">
-            <td className="px-4 py-3 font-semibold">
-              Centro comercial Moctezuma
-            </td>
-            <td className="px-4 py-3">Francisco Chang</td>
-            <td className="px-4 py-3">Mexico</td>
-          </tr>
+          {tasks.map((task, i) => (
+            <TableRow task={task} key={i} />
+          ))}
         </tbody>
       </table>
     </div>
   );
 }
+
+function TableRow({ task, key }) {
+  return (
+    <tr key={key}>
+      <td>{task.taskName}</td>
+      <td>{task.type}</td>
+      <td>{task.taskStatus}</td>
+      <td>{task.priority}</td>
+    </tr>
+  );
+}
+
+TaskTable.propTypes = {
+  tasks: PropTypes.array.isRequired,
+};
+
+TableRow.propTypes = {
+  key: PropTypes.number,
+  task: PropTypes.shape({
+    taskName: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    taskStatus: PropTypes.string.isRequired,
+    priority: PropTypes.string.isRequired,
+  }),
+};

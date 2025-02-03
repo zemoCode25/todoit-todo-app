@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export function Todo() {
   const [isOpenModal, setOpenModal] = useState(false);
+  const [tasks, setTasks] = useState([]);
 
   return (
     <main className="flex h-dvh w-dvw justify-center pt-10">
@@ -28,10 +29,11 @@ export function Todo() {
             <span className="px-1 font-bold text-white">+</span>Add task
           </button>
         </div>
-        <TaskTable />
+        <TaskTable tasks={tasks} />
         <TaskInputModal
           isOpen={isOpenModal}
           onClose={() => setOpenModal(false)}
+          onTaskSubmit={setTasks}
         />
       </div>
     </main>
