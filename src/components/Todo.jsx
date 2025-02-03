@@ -1,11 +1,16 @@
 import { TaskTable } from "./todo/TaskTable";
 import { TaskInputModal } from "./todo/TaskInputModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import { Overlay } from "./utils/Overlay";
 
 export function Todo() {
   const [isOpenModal, setOpenModal] = useState(false);
   const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    setTasks(storedTasks);
+  }, []);
 
   return (
     <main className="flex h-dvh w-dvw justify-center pt-10">

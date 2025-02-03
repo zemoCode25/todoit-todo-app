@@ -20,7 +20,11 @@ export function TaskInputModal({ isOpen, onClose, onTaskSubmit }) {
 
   function handleTaskSubmit(e) {
     e.preventDefault();
-    onTaskSubmit((prevTaskList) => [...prevTaskList, taskData]);
+    onTaskSubmit((prevTaskList) => {
+      const updatedTaskList = [...prevTaskList, taskData];
+      localStorage.setItem("tasks", JSON.stringify(updatedTaskList));
+      return updatedTaskList;
+    });
     onClose();
   }
 
