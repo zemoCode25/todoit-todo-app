@@ -105,7 +105,10 @@ export function TaskInputModal({ isOpen, onClose, onTaskSubmit }) {
           Cancel
         </button>
         <button
-          onClick={handleTaskSubmit}
+          onClick={() => {
+            handleTaskSubmit();
+            onClose();
+          }}
           className="cursor-pointer rounded-md bg-black px-4 py-1 text-white"
         >
           Add Task

@@ -16,7 +16,12 @@ export function TaskTable({ tasks }) {
             </th>
           </tr>
           {tasks.map((task, i) => (
-            <tr key={i}>{<TableData task={task} />}</tr>
+            <tr
+              className="cursor-pointer border-t-[1px] border-gray-300"
+              key={i}
+            >
+              {<TableData task={task} />}
+            </tr>
           ))}
         </tbody>
       </table>
@@ -25,12 +30,17 @@ export function TaskTable({ tasks }) {
 }
 
 function TableData({ task }) {
+  const { taskName, description, type, taskStatus, priority } = task;
+
   return (
     <>
-      <td>{task.taskName}</td>
-      <td>{task.type}</td>
-      <td>{task.taskStatus}</td>
-      <td>{task.priority}</td>
+      <td className="flex flex-col px-4 py-2">
+        <p className="font-semibold">{taskName}</p>
+        <small className="w-[10rem]">{description}</small>
+      </td>
+      <td className="px-4 py-2">{type}</td>
+      <td className="px-4 py-2">{taskStatus}</td>
+      <td className="px-4 py-2">{priority}</td>
     </>
   );
 }
@@ -45,5 +55,6 @@ TableData.propTypes = {
     type: PropTypes.string.isRequired,
     taskStatus: PropTypes.string.isRequired,
     priority: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
   }),
 };
