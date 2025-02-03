@@ -7,7 +7,7 @@ export function Todo() {
   const [isOpenModal, setOpenModal] = useState(false);
 
   return (
-    <main className="my-16 flex h-dvh w-dvw justify-center">
+    <main className="flex h-dvh w-dvw justify-center pt-10">
       <div className="relative flex w-2/3 flex-col">
         <div>
           <h1 className="text-4xl font-semibold">todoit tasks!</h1>

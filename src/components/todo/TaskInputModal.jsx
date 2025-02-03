@@ -1,8 +1,22 @@
 import PropTypes from "prop-types";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export function TaskInputModal({ isOpen, onClose }) {
   const modalRef = useRef(null);
+  const [taskData, setTaskData] = useState({
+    taskName: "",
+    description: "",
+    priority: "",
+    taskStatus: "",
+    type: "",
+  });
+
+  function handleFormChange(e) {
+    setTaskData({
+      ...taskData,
+      [e.target.name]: e.target.value,
+    });
+  }
 
   useEffect(() => {
     function handleOutsideClick(e) {
@@ -31,42 +45,52 @@ export function TaskInputModal({ isOpen, onClose }) {
         className="rounded-md px-2 py-1 text-lg font-semibold outline-none"
         type="text"
         placeholder="Task name"
+        name="taskName"
+        onChange={handleFormChange}
       />
-      <input
-        className="rounded-md px-2 py-1 outline-none"
-        type="text"
+      <textarea
+        name="description"
         placeholder="description"
-      />
+        className="rounded-md px-2 py-1 outline-none"
+        onChange={handleFormChange}
+      ></textarea>
       <div className="flex gap-3 border-b border-b-gray-200 pb-3">
         <select
           className="ml-2 block w-fit cursor-pointer appearance-none rounded-md border border-gray-300 bg-white px-2 py-1 text-sm text-gray-700 shadow-sm outline-none focus:ring-0"
-          name="cars"
-          id="cars"
+          name="priority"
+          id="priority"
+          value={taskData.priority}
+          onChange={handleFormChange}
         >
-          <option value="volvo">Priority 1st</option>
-          <option value="saab">Priority 2nd</option>
-          <option value="mercedes">Priority 3rd</option>
-          <option value="audi">Priority 4th</option>
+          <option value="Priority 1st">Priority 1st</option>
+          <option value="Priority 2nd">Priority 2nd</option>
+          <option value="Priority 3rd">Priority 3rd</option>
+          <option value="Priority 4th">Priority 4th</option>
         </select>
         <select
           className="block w-fit cursor-pointer appearance-none rounded-md border border-gray-300 bg-white px-2 py-1 text-sm text-gray-700 shadow-sm outline-none focus:ring-0"
-          name="cars"
-          id="cars"
+          name="taskStatus"
+          id="status"
+          value={taskData.taskStatus}
+          onChange={handleFormChange}
         >
-          <option value="volvo">Priority 1st</option>
-          <option value="saab">Priority 2nd</option>
-          <option value="mercedes">Priority 3rd</option>
-          <option value="audi">Priority 4th</option>
+          <option value="Todo">Todo</option>
+          <option value="In progress">In progress</option>
+          <option value="Backlog">Backlog</option>
+          <option value="Canceled">Canceled</option>
         </select>
         <select
           className="block w-fit cursor-pointer appearance-none rounded-md border border-gray-300 bg-white px-2 py-1 text-sm text-gray-700 shadow-sm outline-none focus:ring-0"
-          name="cars"
-          id="cars"
+          name="type"
+          id="type"
+          value={taskData.type}
+          onChange={handleFormChange}
         >
-          <option value="volvo">Priority 1st</option>
-          <option value="saab">Priority 2nd</option>
-          <option value="mercedes">Priority 3rd</option>
-          <option value="audi">Priority 4th</option>
+          <option value="Personal">Personal</option>
+          <option value="Professional">Professional</option>
+          <option value="Academic">Academic</option>
+          <option value="Health">Health</option>
+          <option value="Hobby">Hobby</option>
         </select>
       </div>
       <div className="mt-2 ml-auto flex gap-3">
