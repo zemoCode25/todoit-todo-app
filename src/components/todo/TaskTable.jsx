@@ -1,7 +1,11 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { TaskEditModal } from "./TaskEditModal";
 
 export function TaskTable({ tasks, updateTasks }) {
+  const [selectedTask, setSelectedTask] = useState({});
+  const [isUpdateOpen, setUpdateOpen] = useState(false);
+
   return (
     <div className="rounded-lg border border-gray-300">
       <table className="w-[100%] border-collapse">
@@ -20,6 +24,10 @@ export function TaskTable({ tasks, updateTasks }) {
             <tr
               className="cursor-pointer border-t-[1px] border-gray-300"
               key={i}
+              onClick={() => {
+                setSelectedTask(task);
+                setUpdateOpen(true);
+              }}
             >
               {
                 <TableData
@@ -32,7 +40,12 @@ export function TaskTable({ tasks, updateTasks }) {
           ))}
         </tbody>
       </table>
-      <TaskEditModal />
+      <TaskEditModal
+        updateTasks={updateTasks}
+        task={selectedTask}
+        isOpen={isUpdateOpen}
+        onClose={() => setUpdateOpen(false)}
+      />
     </div>
   );
 }
