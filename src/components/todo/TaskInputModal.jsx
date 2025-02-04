@@ -9,6 +9,7 @@ export function TaskInputModal({ isOpen, onClose, onTaskSubmit }) {
     priority: "Priority 1",
     taskStatus: "Todo",
     type: "Personal",
+    isCompleted: false,
   });
 
   function handleFormChange(e) {

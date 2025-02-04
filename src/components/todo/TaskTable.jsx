@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
+import { TaskEditModal } from "./TaskEditModal";
 
-export function TaskTable({ tasks }) {
+export function TaskTable({ tasks, updateTasks }) {
   return (
     <div className="rounded-lg border border-gray-300">
       <table className="w-[100%] border-collapse">
@@ -20,23 +21,48 @@ export function TaskTable({ tasks }) {
               className="cursor-pointer border-t-[1px] border-gray-300"
               key={i}
             >
-              {<TableData task={task} />}
+              {
+                <TableData
+                  task={task}
+                  updateTasks={updateTasks}
+                  taskNumber={i}
+                />
+              }
             </tr>
           ))}
         </tbody>
       </table>
+      <TaskEditModal />
     </div>
   );
 }
 
-function TableData({ task }) {
-  const { taskName, description, type, taskStatus, priority } = task;
+function TableData({ task, updateTasks, taskNumber }) {
+  const { taskName, description, type, taskStatus, priority, isCompleted } =
+    task;
+
+  function handleCheckChange() {
+    updateTasks((prevTaskList) =>
+      prevTaskList.map((taskData, i) => {
+        return i === taskNumber
+          ? { ...task, isCompleted: !isCompleted }
+          : taskData;
+      }),
+    );
+  }
 
   return (
     <>
-      <td className="flex flex-col px-4 py-2">
-        <p className="font-semibold">{taskName}</p>
-        <small className="w-[10rem]">{description}</small>
+      <td className="flex gap-3 px-4 py-2 align-middle">
+        <input
+          type="checkbox"
+          checked={isCompleted}
+          onChange={handleCheckChange}
+        />
+        <div className="flex flex-col">
+          <p className="font-semibold">{taskName}</p>
+          <small className="w-[10rem]">{description}</small>
+        </div>
       </td>
       <td className="px-4 py-2">{type}</td>
       <td className="px-4 py-2">{taskStatus}</td>
@@ -47,6 +73,7 @@ function TableData({ task }) {
 
 TaskTable.propTypes = {
   tasks: PropTypes.array.isRequired,
+  updateTasks: PropTypes.func.isRequired,
 };
 
 TableData.propTypes = {
@@ -56,5 +83,8 @@ TableData.propTypes = {
     taskStatus: PropTypes.string.isRequired,
     priority: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    isCompleted: PropTypes.bool.isRequired,
   }),
+  updateTasks: PropTypes.func.isRequired,
+  taskNumber: PropTypes.number.isRequired,
 };

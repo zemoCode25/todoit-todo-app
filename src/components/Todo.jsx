@@ -8,7 +8,7 @@ export function Todo() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     setTasks(storedTasks);
   }, []);
 
@@ -34,7 +34,7 @@ export function Todo() {
             <span className="px-1 font-bold text-white">+</span>Add task
           </button>
         </div>
-        <TaskTable tasks={tasks} />
+        <TaskTable tasks={tasks} updateTasks={setTasks} />
         <TaskInputModal
           isOpen={isOpenModal}
           onClose={() => setOpenModal(false)}
