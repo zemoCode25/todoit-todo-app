@@ -25,7 +25,10 @@ export function TaskTable({ tasks, updateTasks }) {
               className="cursor-pointer border-t-[1px] border-gray-300"
               key={i}
               onClick={() => {
-                setSelectedTask(task);
+                setSelectedTask({
+                  ...task,
+                  taskNumber: i,
+                });
                 setUpdateOpen(true);
               }}
             >
@@ -54,7 +57,8 @@ function TableData({ task, updateTasks, taskNumber }) {
   const { taskName, description, type, taskStatus, priority, isCompleted } =
     task;
 
-  function handleCheckChange() {
+  function handleCheckChange(e) {
+    e.stopPropagation();
     updateTasks((prevTaskList) =>
       prevTaskList.map((taskData, i) => {
         return i === taskNumber
@@ -71,6 +75,7 @@ function TableData({ task, updateTasks, taskNumber }) {
           type="checkbox"
           checked={isCompleted}
           onChange={handleCheckChange}
+          onClick={(e) => e.stopPropagation()}
         />
         <div className="flex flex-col">
           <p className="font-semibold">{taskName}</p>

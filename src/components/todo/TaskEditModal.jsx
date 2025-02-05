@@ -10,8 +10,15 @@ export function TaskEditModal({ isOpen, task, updateTasks, onClose }) {
     }
   }, [task]);
 
-  const { taskName, description, type, taskStatus, priority, isCompleted } =
-    updateData;
+  const {
+    taskName,
+    description,
+    type,
+    taskStatus,
+    priority,
+    isCompleted,
+    taskNumber,
+  } = updateData;
 
   function handleFormChange(e) {
     setUpdateData({
@@ -20,23 +27,35 @@ export function TaskEditModal({ isOpen, task, updateTasks, onClose }) {
     });
   }
 
-  function handleCheckboxChange(e) {
+  function handleCheckboxChange() {
     setUpdateData({
       ...updateData,
-      isCompleted: e.target.value,
+      isCompleted: !isCompleted,
     });
+  }
+
+  function handleFormSubmission(e) {
+    e.preventDefault();
+    updateTasks((prevTaskList) => {
+      const updatedTaskList = prevTaskList.map((currentTask, i) =>
+        taskNumber === i ? { ...updateData } : currentTask,
+      );
+      localStorage.setItem("tasks", JSON.stringify(updatedTaskList));
+      return updatedTaskList;
+    });
+    onClose();
   }
 
   if (!isOpen) return null;
 
   return (
     <div className="absolute top-1/2 left-1/2 flex w-fit -translate-x-1/2 -translate-y-1/2 flex-col items-center rounded-md bg-white p-3">
-      <form action="" onSubmit={() => updateTasks(updateData)}>
+      <form action="" onSubmit={handleFormSubmission}>
         <div className="flex gap-3">
           <div className="p-0.5">
             <input
               type="checkbox"
-              // checked={isCompleted}
+              checked={isCompleted}
               className="inline-block h-fit pt-10"
               onChange={handleCheckboxChange}
               value={isCompleted}
@@ -129,6 +148,7 @@ TaskEditModal.propTypes = {
     priority: PropTypes.string,
     description: PropTypes.string,
     isCompleted: PropTypes.bool,
+    taskNumber: PropTypes.number,
   }),
   isOpen: PropTypes.bool.isRequired,
   updateTasks: PropTypes.func.isRequired,
