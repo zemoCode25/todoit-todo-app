@@ -12,7 +12,7 @@ export function Todo() {
   }, []);
 
   return (
-    <main className="flex h-dvh w-dvw justify-center pt-10">
+    <main className="my-10 flex h-dvh w-dvw justify-center">
       <div className="relative flex w-2/3 flex-col">
         <div>
           <h1 className="text-4xl font-semibold">todoit tasks!</h1>

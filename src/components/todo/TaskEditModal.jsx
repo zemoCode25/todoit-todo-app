@@ -91,7 +91,7 @@ export function TaskEditModal({ isOpen, task, updateTasks, onClose }) {
               <textarea
                 name="description"
                 placeholder="description"
-                className="rounded-md px-2 py-1 outline-none"
+                className="rounded-md px-2 py-1 text-sm outline outline-gray-200"
                 onChange={handleFormChange}
                 value={description || ""}
                 required

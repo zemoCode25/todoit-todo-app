@@ -22,7 +22,7 @@ export function TaskTable({ tasks, updateTasks }) {
           </tr>
           {tasks.map((task, i) => (
             <tr
-              className="cursor-pointer border-t-[1px] border-gray-300"
+              className="cursor-pointer border-t-[1px] border-gray-300 hover:bg-gray-50"
               key={i}
               onClick={() => {
                 setSelectedTask({
