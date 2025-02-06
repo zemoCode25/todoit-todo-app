@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { TaskEditModal } from "./TaskEditModal";
 
@@ -19,6 +19,7 @@ export function TaskTable({ tasks, updateTasks }) {
             <th className="px-4 py-2 text-left text-sm text-gray-500">
               Priority
             </th>
+            <th className="px-4 py-2 text-left text-sm text-gray-500"></th>
           </tr>
           {tasks.map((task, i) => (
             <tr
@@ -72,6 +73,10 @@ function TableData({ task, updateTasks, taskNumber }) {
     );
   }
 
+  // * Add table data of three dot option for all the table rows\
+  // * Attach a state for each three dot button to open option div
+  // * OnClick event to delete the task
+
   return (
     <>
       <td className="flex gap-3 px-4 py-2 align-middle">
@@ -91,9 +96,86 @@ function TableData({ task, updateTasks, taskNumber }) {
       <td className="px-4 py-2">{type}</td>
       <td className="px-4 py-2">{taskStatus}</td>
       <td className="px-4 py-2">{priority}</td>
+      <td className="px-4 py-2"></td>
+      <td className="px-4 py-2">
+        <ThreeDot updateTasks={updateTasks} taskNumber={taskNumber} />
+      </td>
     </>
   );
 }
+
+export function ThreeDot({ updateTasks, taskNumber: targetTaskIndex }) {
+  const [isOptionOpen, setOption] = useState(false);
+  const optionDiv = useRef(null);
+
+  useEffect(() => {
+    function handleOutsideClick(e) {
+      if (optionDiv.current && !optionDiv.current.contains(e.target)) {
+        setOption(false);
+      }
+    }
+
+    if (isOptionOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    }
+
+    () => {
+      return document.addEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isOptionOpen]);
+
+  function handleThreeDotClick(e) {
+    e.stopPropagation();
+    setOption(!isOptionOpen);
+    console.log("CLICKED");
+  }
+
+  function handleDelete(e) {
+    e.stopPropagation();
+    setOption(false);
+    // Filter the task state variable by extracting all element whose index does not match the target task
+    updateTasks((prevTaskList) => {
+      const updatedTaskList = prevTaskList.filter(
+        (task, i) => i !== targetTaskIndex,
+      );
+      return updatedTaskList;
+    });
+  }
+
+  return (
+    <div
+      onClick={handleThreeDotClick}
+      className="relative flex w-fit items-center"
+      ref={optionDiv}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="#6A7282"
+        className="z-0"
+      >
+        <path d="M240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400Z" />
+      </svg>
+      {isOptionOpen && (
+        <div className="absolute top-7 z-50 rounded-sm border border-gray-100 bg-white p-2 shadow-md">
+          <button
+            onClick={handleDelete}
+            className="cursor-pointer rounded-md px-4 py-1.5 text-sm text-black transition-all duration-200 ease-in-out hover:bg-red-700 hover:text-white"
+          >
+            Delete
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+ThreeDot.propTypes = {
+  updateTasks: PropTypes.func.isRequired,
+  taskNumber: PropTypes.func.isRequired,
+};
 
 TaskTable.propTypes = {
   tasks: PropTypes.array.isRequired,
