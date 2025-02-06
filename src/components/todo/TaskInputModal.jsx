@@ -92,6 +92,7 @@ export function TaskInputModal({ isOpen, onClose, onTaskSubmit }) {
             <option value="In progress">In progress</option>
             <option value="Backlog">Backlog</option>
             <option value="Canceled">Canceled</option>
+            <option value="Completed">Completed</option>
           </select>
           <select
             className="block w-fit cursor-pointer appearance-none rounded-md border border-gray-300 bg-white px-2 py-1 text-sm text-gray-700 shadow-sm outline-none focus:ring-0"

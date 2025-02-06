@@ -6,8 +6,6 @@ import { TemplateCard } from "./TemplateCard";
 export function TemplateContainer() {
   const [category, setCategory] = useState("Work");
 
-  console.log(category);
-
   return (
     <div className="my-10 flex flex-col items-center justify-center">
       <CategoryList updateCategory={setCategory} currentCategory={category} />
@@ -20,8 +18,6 @@ function CategoryList({ updateCategory, currentCategory }) {
   const templateCategories = contentTemplates.map(
     (contentTemplate) => contentTemplate.templateGroupName,
   );
-
-  console.log(templateCategories);
 
   return (
     <ul className="flex gap-10">

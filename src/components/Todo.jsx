@@ -1,7 +1,6 @@
 import { TaskTable } from "./todo/TaskTable";
 import { TaskInputModal } from "./todo/TaskInputModal";
 import { useState, useEffect } from "react";
-// import { Overlay } from "./utils/Overlay";
 
 export function Todo() {
   const [isOpenModal, setOpenModal] = useState(false);

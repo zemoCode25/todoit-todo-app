@@ -62,7 +62,11 @@ function TableData({ task, updateTasks, taskNumber }) {
     updateTasks((prevTaskList) =>
       prevTaskList.map((taskData, i) => {
         return i === taskNumber
-          ? { ...task, isCompleted: !isCompleted }
+          ? {
+              ...task,
+              isCompleted: !isCompleted,
+              taskStatus: !isCompleted ? "Completed" : taskData.taskStatus,
+            }
           : taskData;
       }),
     );
@@ -78,7 +82,9 @@ function TableData({ task, updateTasks, taskNumber }) {
           onClick={(e) => e.stopPropagation()}
         />
         <div className="flex flex-col">
-          <p className="font-semibold">{taskName}</p>
+          <p className={`font-semibold ${isCompleted ? "line-through" : ""}`}>
+            {taskName}
+          </p>
           <small className="w-[10rem]">{description}</small>
         </div>
       </td>
