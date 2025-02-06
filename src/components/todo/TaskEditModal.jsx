@@ -53,7 +53,6 @@ export function TaskEditModal({ isOpen, task, updateTasks, onClose }) {
       const updatedTaskList = prevTaskList.map((currentTask, i) =>
         taskNumber === i ? { ...updateData } : currentTask,
       );
-      localStorage.setItem("tasks", JSON.stringify(updatedTaskList));
       return updatedTaskList;
     });
     onClose();

@@ -23,7 +23,6 @@ export function TaskInputModal({ isOpen, onClose, onTaskSubmit }) {
     e.preventDefault();
     onTaskSubmit((prevTaskList) => {
       const updatedTaskList = [...prevTaskList, taskData];
-      localStorage.setItem("tasks", JSON.stringify(updatedTaskList));
       return updatedTaskList;
     });
     onClose();

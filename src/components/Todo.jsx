@@ -4,12 +4,15 @@ import { useState, useEffect } from "react";
 
 export function Todo() {
   const [isOpenModal, setOpenModal] = useState(false);
-  const [tasks, setTasks] = useState([]);
+  // Direct initialization of the state variable from the localStorage data
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks")) || [],
+  );
 
+  // Save the tasks array in every state update
   useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    setTasks(storedTasks);
-  }, []);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <main className="my-10 flex h-dvh w-dvw justify-center">

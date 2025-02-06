@@ -174,7 +174,7 @@ export function ThreeDot({ updateTasks, taskNumber: targetTaskIndex }) {
 
 ThreeDot.propTypes = {
   updateTasks: PropTypes.func.isRequired,
-  taskNumber: PropTypes.func.isRequired,
+  taskNumber: PropTypes.number.isRequired,
 };
 
 TaskTable.propTypes = {
