@@ -6,7 +6,7 @@ export function TaskInputModal({ isOpen, onClose, onTaskSubmit }) {
   const [taskData, setTaskData] = useState({
     taskName: "",
     description: "",
-    priority: "Priority 1",
+    priority: "Priority 1st",
     taskStatus: "Todo",
     type: "Personal",
     isCompleted: false,
@@ -65,7 +65,6 @@ export function TaskInputModal({ isOpen, onClose, onTaskSubmit }) {
           placeholder="description"
           className="rounded-md px-2 py-1 outline-none"
           onChange={handleFormChange}
-          required
         ></textarea>
         <div className="flex gap-3 border-b border-b-gray-200 pb-3">
           <select

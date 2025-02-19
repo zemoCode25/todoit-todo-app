@@ -93,7 +93,6 @@ export function TaskEditModal({ isOpen, task, updateTasks, onClose }) {
                 className="rounded-md px-2 py-1 text-sm outline outline-gray-200"
                 onChange={handleFormChange}
                 value={description || ""}
-                required
               ></textarea>
               <div className="flex gap-3 border-b border-b-gray-300 pb-3">
                 <select

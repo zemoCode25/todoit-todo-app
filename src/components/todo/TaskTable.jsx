@@ -1,27 +1,144 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { TaskEditModal } from "./TaskEditModal";
+
+// *
 
 export function TaskTable({ tasks, updateTasks }) {
   const [selectedTask, setSelectedTask] = useState({});
   const [isUpdateOpen, setUpdateOpen] = useState(false);
+  const [sortedTasks, setSortedTasks] = useState(tasks);
+
+  const [sort, setSort] = useState({
+    headerToSort: "task",
+    direction: "desc",
+  });
+
+  const sortTypeColumn = useCallback(() => {
+    const tasksCopy = [...tasks];
+
+    const priorityOrder = {
+      Personal: 1,
+      Professional: 2,
+      Academic: 3,
+      Health: 4,
+      Hobby: 5,
+    };
+
+    return tasksCopy.sort((a, b) => {
+      const orderA = priorityOrder[a.type];
+      const orderB = priorityOrder[b.type];
+
+      return sort.direction === "desc" ? orderB - orderA : orderA - orderB;
+    });
+  }, [sort.direction, tasks]);
+
+  const sortStatusColumn = useCallback(() => {
+    const tasksCopy = [...tasks];
+
+    const priorityOrder = {
+      ["Todo"]: 1,
+      ["In progress"]: 2,
+      ["Backlog"]: 3,
+      ["Canceled"]: 4,
+      ["Completed"]: 5,
+    };
+
+    return tasksCopy.sort((a, b) => {
+      const orderA = priorityOrder[a.taskStatus];
+      const orderB = priorityOrder[b.taskStatus];
+
+      return sort.direction === "desc" ? orderB - orderA : orderA - orderB;
+    });
+  }, [tasks, sort.direction]);
+
+  const sortPriorityColumn = useCallback(() => {
+    const tasksCopy = [...tasks];
+
+    const priorityOrder = {
+      ["Priority 1st"]: 1,
+      ["Priority 2nd"]: 2,
+      ["Priority 3rd"]: 3,
+      ["Priority 4th"]: 4,
+    };
+
+    const yey = tasksCopy.sort((a, b) => {
+      const orderA = priorityOrder[a.priority];
+      const orderB = priorityOrder[b.priority];
+
+      return sort.direction === "desc" ? orderB - orderA : orderA - orderB;
+    });
+    return yey;
+  }, [tasks, sort.direction]);
+
+  function handleHeaderClick(header) {
+    setSort((prevSort) => ({
+      headerToSort: header,
+      direction:
+        prevSort.headerToSort === header
+          ? prevSort.direction === "asc"
+            ? "desc"
+            : "asc"
+          : "desc",
+    }));
+
+    setSortedTasks(getSortedTasks());
+  }
+
+  const getSortedTasks = useCallback(() => {
+    if (sort.headerToSort === "task") return tasks;
+
+    const columnSortFunctions = {
+      type: sortTypeColumn,
+      taskStatus: sortStatusColumn,
+      priority: sortPriorityColumn,
+    };
+
+    return columnSortFunctions[sort.headerToSort](tasks);
+  }, [tasks, sort, sortPriorityColumn, sortStatusColumn, sortTypeColumn]);
+
+  useEffect(() => {
+    setSortedTasks(getSortedTasks());
+  }, [sort, getSortedTasks]);
+
+  const headerLabels = ["Task", "Type", "Status", "Priority"];
+
+  const headerClickLabel = {
+    Type: "type",
+    Status: "taskStatus",
+    Priority: "priority",
+  };
 
   return (
     <div className="rounded-lg border border-gray-300">
       <table className="w-[100%] border-collapse">
         <tbody>
           <tr className="border-gray-300">
-            <th className="px-4 py-1 text-left text-sm text-gray-500">Task</th>
-            <th className="px-4 py-2 text-left text-sm text-gray-500">Type</th>
-            <th className="px-4 py-2 text-left text-sm text-gray-500">
-              Status
-            </th>
-            <th className="px-4 py-2 text-left text-sm text-gray-500">
-              Priority
-            </th>
+            {headerLabels.map((label, i) => {
+              if (label === "Task") {
+                return (
+                  <th
+                    key={i}
+                    className="cursor-pointer px-4 py-1 text-left text-sm text-gray-500"
+                  >
+                    Task
+                  </th>
+                );
+              }
+
+              return (
+                <th
+                  onClick={() => handleHeaderClick(headerClickLabel[label])}
+                  key={i}
+                  className="cursor-pointer px-4 py-1 text-left text-sm text-gray-500"
+                >
+                  {label}
+                </th>
+              );
+            })}
             <th className="px-4 py-2 text-left text-sm text-gray-500"></th>
           </tr>
-          {tasks.map((task, i) => (
+          {sortedTasks.map((task, i) => (
             <tr
               className="cursor-pointer border-t-[1px] border-gray-300 hover:bg-gray-50"
               key={i}
@@ -73,7 +190,7 @@ function TableData({ task, updateTasks, taskNumber }) {
     );
   }
 
-  // * Add table data of three dot option for all the table rows\
+  // * Add table data of three dot option for all the table rows
   // * Attach a state for each three dot button to open option div
   // * OnClick event to delete the task
 
@@ -127,7 +244,6 @@ export function ThreeDot({ updateTasks, taskNumber: targetTaskIndex }) {
   function handleThreeDotClick(e) {
     e.stopPropagation();
     setOption(!isOptionOpen);
-    console.log("CLICKED");
   }
 
   function handleDelete(e) {
