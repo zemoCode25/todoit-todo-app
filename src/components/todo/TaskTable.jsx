@@ -4,7 +4,7 @@ import { TaskEditModal } from "./TaskEditModal";
 
 // *
 
-export function TaskTable({ tasks, updateTasks, filter }) {
+export function TaskTable({ tasks, updatedTasks, filter }) {
   const [selectedTask, setSelectedTask] = useState({});
   const [isUpdateOpen, setUpdateOpen] = useState(false);
 
@@ -158,7 +158,7 @@ export function TaskTable({ tasks, updateTasks, filter }) {
               {
                 <TableData
                   task={task}
-                  updateTasks={updateTasks}
+                  updatedTasks={updatedTasks}
                   taskNumber={i}
                 />
               }
@@ -167,7 +167,7 @@ export function TaskTable({ tasks, updateTasks, filter }) {
         </tbody>
       </table>
       <TaskEditModal
-        updateTasks={updateTasks}
+        updatedTasks={updatedTasks}
         task={selectedTask}
         isOpen={isUpdateOpen}
         onClose={() => setUpdateOpen(false)}
@@ -176,13 +176,13 @@ export function TaskTable({ tasks, updateTasks, filter }) {
   );
 }
 
-function TableData({ task, updateTasks, taskNumber }) {
+function TableData({ task, updatedTasks, taskNumber }) {
   const { taskName, description, type, taskStatus, priority, isCompleted } =
     task;
 
   function handleCheckChange(e) {
     e.stopPropagation();
-    updateTasks((prevTaskList) =>
+    updatedTasks((prevTaskList) =>
       prevTaskList.map((taskData, i) => {
         return i === taskNumber
           ? {
@@ -220,13 +220,13 @@ function TableData({ task, updateTasks, taskNumber }) {
       <td className="px-4 py-2">{priority}</td>
       <td className="px-4 py-2"></td>
       <td className="px-4 py-2">
-        <ThreeDot updateTasks={updateTasks} taskNumber={taskNumber} />
+        <ThreeDot updatedTasks={updatedTasks} taskNumber={taskNumber} />
       </td>
     </>
   );
 }
 
-export function ThreeDot({ updateTasks, taskNumber: targetTaskIndex }) {
+export function ThreeDot({ updatedTasks, taskNumber: targetTaskIndex }) {
   const [isOptionOpen, setOption] = useState(false);
   const optionDiv = useRef(null);
 
@@ -255,7 +255,7 @@ export function ThreeDot({ updateTasks, taskNumber: targetTaskIndex }) {
     e.stopPropagation();
     setOption(false);
     // Filter the task state variable by extracting all element whose index does not match the target task
-    updateTasks((prevTaskList) => {
+    updatedTasks((prevTaskList) => {
       const updatedTaskList = prevTaskList.filter(
         (task, i) => i !== targetTaskIndex,
       );
@@ -294,13 +294,13 @@ export function ThreeDot({ updateTasks, taskNumber: targetTaskIndex }) {
 }
 
 ThreeDot.propTypes = {
-  updateTasks: PropTypes.func.isRequired,
+  updatedTasks: PropTypes.func.isRequired,
   taskNumber: PropTypes.number.isRequired,
 };
 
 TaskTable.propTypes = {
   tasks: PropTypes.array.isRequired,
-  updateTasks: PropTypes.func.isRequired,
+  updatedTasks: PropTypes.func.isRequired,
   filter: PropTypes.string.isRequired,
 };
 
@@ -313,6 +313,6 @@ TableData.propTypes = {
     description: PropTypes.string.isRequired,
     isCompleted: PropTypes.bool.isRequired,
   }),
-  updateTasks: PropTypes.func.isRequired,
+  updatedTasks: PropTypes.func.isRequired,
   taskNumber: PropTypes.number.isRequired,
 };

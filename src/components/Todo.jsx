@@ -46,7 +46,7 @@ export function Todo() {
             <span className="px-1 font-bold text-white">+</span>Add task
           </button>
         </div>
-        <TaskTable tasks={tasks} updateTasks={setTasks} filter={filter} />
+        <TaskTable tasks={tasks} updatedTasks={setTasks} filter={filter} />
         <TaskInputModal
           isOpen={isOpenModal}
           onClose={() => setOpenModal(false)}

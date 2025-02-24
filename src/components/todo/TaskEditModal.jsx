@@ -2,9 +2,11 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Overlay } from "../utils/components/Overlay";
 
-export function TaskEditModal({ isOpen, task, updateTasks, onClose }) {
+export function TaskEditModal({ isOpen, task, updatedTasks, onClose }) {
   const [updateData, setUpdateData] = useState(task || {});
   const [isOverlayOpen, setOverlayOpen] = useState(true);
+
+  // Set the updateData after a task has been selected
 
   useEffect(() => {
     if (task) {
@@ -21,6 +23,8 @@ export function TaskEditModal({ isOpen, task, updateTasks, onClose }) {
     isCompleted,
     taskNumber,
   } = updateData;
+
+  // Manage all the side effects of opening and closing of the modal and overlay
 
   useEffect(() => {
     if (isOpen) {
@@ -49,7 +53,7 @@ export function TaskEditModal({ isOpen, task, updateTasks, onClose }) {
 
   function handleFormSubmission(e) {
     e.preventDefault();
-    updateTasks((prevTaskList) => {
+    updatedTasks((prevTaskList) => {
       const updatedTaskList = prevTaskList.map((currentTask, i) =>
         taskNumber === i ? { ...updateData } : currentTask,
       );
@@ -57,6 +61,8 @@ export function TaskEditModal({ isOpen, task, updateTasks, onClose }) {
     });
     onClose();
   }
+
+  // Hide the modal if the isOpen is stated as false
 
   if (!isOpen) {
     return null;
@@ -170,6 +176,6 @@ TaskEditModal.propTypes = {
     taskNumber: PropTypes.number,
   }),
   isOpen: PropTypes.bool.isRequired,
-  updateTasks: PropTypes.func.isRequired,
+  updatedTasks: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };
