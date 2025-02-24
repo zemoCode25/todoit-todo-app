@@ -1,17 +1,16 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import { TaskEditModal } from "./TaskEditModal";
 
 // *
 
-export function TaskTable({ tasks, updateTasks }) {
+export function TaskTable({ tasks, updateTasks, filter }) {
   const [selectedTask, setSelectedTask] = useState({});
   const [isUpdateOpen, setUpdateOpen] = useState(false);
-  const [sortedTasks, setSortedTasks] = useState(tasks);
 
   const [sort, setSort] = useState({
     headerToSort: "task",
-    direction: "desc",
+    direction: "asc",
   });
 
   const sortTypeColumn = useCallback(() => {
@@ -81,25 +80,31 @@ export function TaskTable({ tasks, updateTasks }) {
             : "asc"
           : "desc",
     }));
-
-    setSortedTasks(getSortedTasks());
   }
+
+  // getSortedTasks from tasks and sort changes and eventually recreate the getfilteredTasks function
 
   const getSortedTasks = useCallback(() => {
     if (sort.headerToSort === "task") return tasks;
+    if (sort.headerToSort === "type") return sortTypeColumn(tasks);
+    if (sort.headerToSort === "taskStatus") return sortStatusColumn(tasks);
+    if (sort.headerToSort === "priority") return sortPriorityColumn(tasks);
 
-    const columnSortFunctions = {
-      type: sortTypeColumn,
-      taskStatus: sortStatusColumn,
-      priority: sortPriorityColumn,
-    };
-
-    return columnSortFunctions[sort.headerToSort](tasks);
+    return tasks; // Default case (fallback)
   }, [tasks, sort, sortPriorityColumn, sortStatusColumn, sortTypeColumn]);
 
-  useEffect(() => {
-    setSortedTasks(getSortedTasks());
-  }, [sort, getSortedTasks]);
+  // getfilteredTasks reacts from getSortedTasks changes in order to filter the sorted tasks
+  const getfilteredTasks = useCallback(() => {
+    const sortedTasks = getSortedTasks();
+
+    return sortedTasks.filter((task) =>
+      task.taskName.toLowerCase().includes(filter.toLowerCase()),
+    );
+  }, [filter, getSortedTasks]);
+
+  // update filteredTasks whenever getfilteredTasks runs
+
+  const filteredTasks = useMemo(() => getfilteredTasks(), [getfilteredTasks]);
 
   const headerLabels = ["Task", "Type", "Status", "Priority"];
 
@@ -138,7 +143,7 @@ export function TaskTable({ tasks, updateTasks }) {
             })}
             <th className="px-4 py-2 text-left text-sm text-gray-500"></th>
           </tr>
-          {sortedTasks.map((task, i) => (
+          {filteredTasks.map((task, i) => (
             <tr
               className="cursor-pointer border-t-[1px] border-gray-300 hover:bg-gray-50"
               key={i}
@@ -296,6 +301,7 @@ ThreeDot.propTypes = {
 TaskTable.propTypes = {
   tasks: PropTypes.array.isRequired,
   updateTasks: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
 };
 
 TableData.propTypes = {

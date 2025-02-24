@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 export function Todo() {
   const [isOpenModal, setOpenModal] = useState(false);
+  const [filter, setFilter] = useState("");
   // Direct initialization of the state variable from the localStorage data
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks")) || [],
@@ -13,6 +14,14 @@ export function Todo() {
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
+
+  // Filter tasks
+  // Filter input controlled element
+
+  function handleFilterChange(e) {
+    e.preventDefault();
+    setFilter(e.target.value);
+  }
 
   return (
     <main className="my-10 flex h-dvh w-dvw justify-center">
@@ -28,6 +37,7 @@ export function Todo() {
             className="rounded-md px-2 py-1 text-sm outline outline-gray-300"
             placeholder="Filter task..."
             type="text"
+            onChange={handleFilterChange}
           />
           <button
             onClick={() => setOpenModal(true)}
@@ -36,7 +46,7 @@ export function Todo() {
             <span className="px-1 font-bold text-white">+</span>Add task
           </button>
         </div>
-        <TaskTable tasks={tasks} updateTasks={setTasks} />
+        <TaskTable tasks={tasks} updateTasks={setTasks} filter={filter} />
         <TaskInputModal
           isOpen={isOpenModal}
           onClose={() => setOpenModal(false)}
