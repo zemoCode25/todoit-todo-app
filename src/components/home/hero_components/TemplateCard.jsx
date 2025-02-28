@@ -8,7 +8,9 @@ export function TemplateCard({ template }) {
       <div className="flex w-full justify-center bg-gray-50 py-4">
         <img
           className="w-24"
-          src="./assets/https___images.ctfassets.net_dm4oa8qtogq0_1la3hgXN3C6hvQI6IulAKV_14b9e9e3675dea1a0d8b3e0c82559a52_accounting-tasks.avif"
+          src={
+            "/assets/https___images.ctfassets.net_dm4oa8qtogq0_1la3hgXN3C6hvQI6IulAKV_14b9e9e3675dea1a0d8b3e0c82559a52_accounting-tasks.avif"
+          }
           alt=""
         />
       </div>
