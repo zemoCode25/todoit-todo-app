@@ -18,13 +18,8 @@ export function Headline({ directTodo }) {
           Start for free
         </button>
       </div>
-      <div className="w-[55%] rounded-lg bg-black pb-4">
-        <img
-          src={
-            "/assets/https___todoist.com_static_home-teams_intro_wide_headerui.en.avif"
-          }
-          alt="todoit headline image"
-        />
+      <div className="w-[55%] rounded-lg bg-black p-4">
+        <img src={"/assets/headline_pic.jpg"} alt="todoit headline image" />
       </div>
     </div>
   );
