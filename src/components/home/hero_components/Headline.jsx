@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import image from "../../../../assets/headline_pic.jpg";
 
 export function Headline({ directTodo }) {
   return (
@@ -19,7 +20,7 @@ export function Headline({ directTodo }) {
         </button>
       </div>
       <div className="w-[55%] rounded-lg bg-black p-4">
-        <img src={"/assets/headline_pic.jpg"} alt="todoit headline image" />
+        <img src={image} alt="todoit headline image" />
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import image from "../../../../assets/headline_pic.jpg";
+
 export function Content() {
   return (
     <div className="relative my-10 flex h-full justify-between">
@@ -36,10 +38,7 @@ export function Content() {
         </div>
       </div>
       <div className="sticky top-40 h-fit w-[55%] rounded-lg pb-4">
-        <img
-          src="./assets/https___todoist.com_static_home-teams_intro_wide_headerui.en.avif"
-          alt="todoit headline image"
-        />
+        <img src={image} alt="todoit headline image" />
       </div>
     </div>
   );
